@@ -134,9 +134,9 @@ class ServiceTile extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text('Service'),
-            Text(
-              '0x${service.uuid.toString().toUpperCase().substring(4, 8)}',
-            )
+            Text('0x${service.uuid.toString().toUpperCase().substring(4, 8)}',
+                style: Theme.of(context).textTheme.bodyText1?.copyWith(
+                    color: Theme.of(context).textTheme.caption?.color))
           ],
         ),
         children: characteristicTiles,
@@ -182,8 +182,9 @@ class CharacteristicTile extends StatelessWidget {
               children: <Widget>[
                 Text('Characteristic'),
                 Text(
-                  '0x${characteristic.uuid.toString().toUpperCase().substring(4, 8)}',
-                )
+                    '0x${characteristic.uuid.toString().toUpperCase().substring(4, 8)}',
+                    style: Theme.of(context).textTheme.bodyText1?.copyWith(
+                        color: Theme.of(context).textTheme.caption?.color))
               ],
             ),
             subtitle: Text(value.toString()),
@@ -241,9 +242,11 @@ class DescriptorTile extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text('Descriptor'),
-          Text(
-            '0x${descriptor.uuid.toString().toUpperCase().substring(4, 8)}',
-          )
+          Text('0x${descriptor.uuid.toString().toUpperCase().substring(4, 8)}',
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyText1
+                  ?.copyWith(color: Theme.of(context).textTheme.caption?.color))
         ],
       ),
       subtitle: StreamBuilder<List<int>>(
@@ -286,11 +289,11 @@ class AdapterStateTile extends StatelessWidget {
       child: ListTile(
         title: Text(
           'Bluetooth adapter is ${state.toString().substring(15)}',
-          style: TextStyle(color: Colors.white),
+          style: Theme.of(context).primaryTextTheme.subtitle1,
         ),
         trailing: Icon(
           Icons.error,
-          color: Colors.red,
+          color: Theme.of(context).primaryTextTheme.subtitle1?.color,
         ),
       ),
     );
