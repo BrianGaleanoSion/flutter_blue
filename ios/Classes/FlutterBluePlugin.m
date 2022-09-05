@@ -101,7 +101,13 @@ typedef NS_ENUM(NSUInteger, LogLevel) {
     [self->_centralManager scanForPeripheralsWithServices:uuids options:scanOpts];
     result(nil);
   } else if([@"stopScan" isEqualToString:call.method]) {
-    [self->_centralManager stopScan];
+    double delayInSeconds = 0.2; // set the time
+      dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+      dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        // do something here
+          [self->_centralManager stopScan];
+      });
+    
     result(nil);
   } else if([@"getConnectedDevices" isEqualToString:call.method]) {
     // Cannot pass blank UUID list for security reasons. Assume all devices have the Generic Access service 0x1800
