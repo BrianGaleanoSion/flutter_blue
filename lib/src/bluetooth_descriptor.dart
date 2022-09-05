@@ -32,8 +32,7 @@ class BluetoothDescriptor {
       ..characteristicUuid = characteristicUuid.toString()
       ..serviceUuid = serviceUuid.toString();
 
-    await FlutterBlue.instance._channel
-        .invokeMethod('readDescriptor', request.writeToBuffer());
+    await FlutterBlue.instance._channel.invokeMethod('readDescriptor', request.writeToBuffer());
 
     return FlutterBlue.instance._methodStream
         .where((m) => m.method == "ReadDescriptorResponse")
@@ -61,8 +60,7 @@ class BluetoothDescriptor {
       ..serviceUuid = serviceUuid.toString()
       ..value = value;
 
-    await FlutterBlue.instance._channel
-        .invokeMethod('writeDescriptor', request.writeToBuffer());
+    await FlutterBlue.instance._channel.invokeMethod('writeDescriptor', request.writeToBuffer());
 
     return FlutterBlue.instance._methodStream
         .where((m) => m.method == "WriteDescriptorResponse")
@@ -75,9 +73,7 @@ class BluetoothDescriptor {
             (p.request.serviceUuid == request.serviceUuid))
         .first
         .then((w) => w.success)
-        .then((success) => (!success)
-            ? throw new Exception('Failed to write the descriptor')
-            : null)
+        .then((success) => (!success) ? throw new Exception('Failed to write the descriptor') : null)
         .then((_) => _value.add(value))
         .then((_) => null);
   }
