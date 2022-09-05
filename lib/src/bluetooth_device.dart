@@ -17,6 +17,9 @@ class BluetoothDevice {
   BehaviorSubject<bool> _isDiscoveringServices = BehaviorSubject.seeded(false);
   Stream<bool> get isDiscoveringServices => _isDiscoveringServices.stream;
 
+  BluetoothDevice(this.id, this.name, this.type, this._isDiscoveringServices,
+      this._services);
+
   /// Establishes a connection to the Bluetooth Device.
   Future<void> connect({
     Duration? timeout,
